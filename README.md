@@ -4,6 +4,7 @@
 1. myproject : Express项目
 
         Config/mysqlConfig.js: Mysql数据库的配置文件
+        Config/serverConfig.js: 服务器配置文件(端口等)
 
         Common/database/Mysql.js: Mysql数据库连接与请求
         Common/log/SystemLog.js: 打印日志:颜色
@@ -11,6 +12,11 @@
 
         Common/util/util.js: 常用的功能函数
         Common/util/middleware.js: 自定义中间件函数
+
+        server/httpServer.js: 创建http服务器
+        server/httpsServer.js: 创建https服务器
+
+
 
 
 
