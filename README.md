@@ -15,6 +15,11 @@
 
         server/httpServer.js: 创建http服务器
         server/httpsServer.js: 创建https服务器
+        server/ioServer.js: 创建io.socket服务器
+
+        document: 存放说明文档
+
+        test/ioClient.html: 创建socket.io客户端
 
 
 

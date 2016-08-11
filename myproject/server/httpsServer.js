@@ -7,7 +7,6 @@ var serverConfig = require('../Config/serverConfig.js');
 var middleware = require('../Common/util/middleware.js');
 
 
-
 var port = serverConfig.https.port;
 app.set('port', port);
 

@@ -4,6 +4,9 @@ var serverConfig = {
     },
     https: {
         port: 3004
+    },
+    io: {
+        port: 3005
     }
 
 };
