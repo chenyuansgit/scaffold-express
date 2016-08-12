@@ -3,10 +3,14 @@ var serverConfig = {
         port: 3003,
     },
     https: {
-        port: 3004
+        port: 3004,
     },
     io: {
-        port: 3005
+        port: 3005,
+    },
+    tcp: {
+        host: '127.0.0.1',
+        port: 3006,
     }
 
 };
