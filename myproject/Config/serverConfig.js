@@ -11,6 +11,11 @@ var serverConfig = {
     tcp: {
         host: '127.0.0.1',
         port: 3006,
+    },
+    udp: {
+        host: '127.0.0.1',
+        port: 3007,
+        clientPort: 3008
     }
 
 };
