@@ -1,3 +1,5 @@
+var path = require('path');
+
 var searchConfig = {
     // 要监听的mysql服务器地址
     server: {
@@ -15,6 +17,9 @@ var searchConfig = {
                 zhDivisiField: ['Name'] // 需要分词的字段
             }
         ]
+    },
+    si: {
+        rootPath : path.join(__dirname, '../', 'si')
     }
 };
 

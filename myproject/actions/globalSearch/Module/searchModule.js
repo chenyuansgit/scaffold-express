@@ -4,10 +4,12 @@ var path = require('path');
 var co = require('co');
 
 
-var monitorConfig = require('../Config/searchConfig.js').database;
+var monitorConfig = require('../Config/searchConfig.js');
 
-var tables = monitorConfig.tables;
-var limit = monitorConfig.limit;
+var rootPath = monitorConfig.si.rootPath;
+
+var tables = monitorConfig.database.tables;
+var limit = monitorConfig.database.limit;
 
 var opt = {
     batchName: 'my batch'
@@ -65,7 +67,9 @@ class SearchEngine {
 
     // 获取options参数
     _getOption(galleryId, tableName) {
-        var indexPath = path.join(__dirname, '../', 'si', galleryId + '+' + tableName);
+        var indexPath = path.join(rootPath, galleryId + '+' + tableName);
+
+        console.log('indexPath:',indexPath);
 
         var options = {
             deletable: true,
