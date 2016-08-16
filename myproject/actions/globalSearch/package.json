@@ -1,0 +1,14 @@
+{
+  "name": "globalSearch",
+  "version": "0.0.0",
+  "private": true,
+  "scripts": {
+    "start": "node ./monitorMysql.js",
+    "search": "node ./search.js"
+  },
+  "dependencies": {
+    "co": "^4.6.0",
+    "nodejieba": "^2.2.3",
+    "search-index": "^0.8.15"
+  }
+}
