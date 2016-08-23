@@ -4,11 +4,10 @@
   "private": true,
   "scripts": {
     "start": "node ./monitorMysql.js",
-    "test": "mocha ./test/search.single.test.js"
+    "search": "node ./search.js"
   },
   "dependencies": {
-    "co": "^4.6.0",
-    "nodejieba": "^2.2.3",
-    "search-index": "^0.8.15"
+    "gm": "^1.23.0",
+    "mkdirp": "^0.5.1"
   }
 }
