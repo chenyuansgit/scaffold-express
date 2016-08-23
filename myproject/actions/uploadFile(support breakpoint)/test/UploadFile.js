@@ -14,7 +14,7 @@ function UploadFile(file) {
 
     // 文件每块的大小(2M)
     //this.chunkSize = 2097152;
-    this.chunkSize = 1024;
+    this.chunkSize = 1024*10;
     this.chunksNumber = Math.ceil(this.file.size / this.chunkSize);
     this.currentChunkIndex = 0;
 };
@@ -53,7 +53,7 @@ UploadFile.prototype.getTmpFileSize = function (socket, filename) {
 };
 
 // 向数据库发送文件
-UploadFile.prototype.saveFileContent = function (socket, content) {
+UploadFile.prototype.saveFileContent = function (socket) {
     var self = this;
 
     return new Promise(function (resolve, reject) {
@@ -113,7 +113,7 @@ UploadFile.prototype.startUploader = function () {
                 // 读取文件内容
                 // 发送文件内容
 
-                return self.saveFileContent(socket, 'hello');
+                return self.saveFileContent(socket);
             })
             .then(function (result) {
                 // 校验传输的md5

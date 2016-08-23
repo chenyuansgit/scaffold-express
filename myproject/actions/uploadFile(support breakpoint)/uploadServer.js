@@ -40,7 +40,7 @@ ioServer.on('connection', function (socket) {
 
     // 2.上传文件到临时路径
     socket.on('upload file', function (message) {
-        console.log('2.upload file:', message);
+        //console.log('2.upload file:', message);
         //console.log('upload file...', message.content.length);
         var dir = tempPath;
         uploadModule.appendFile(tempFileFullPath, dir, message.content, function (error, result) {
