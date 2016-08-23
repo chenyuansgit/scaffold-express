@@ -3,59 +3,58 @@
 <head>
     <meta charset="UTF-8">
     <title>Test io socket</title>
+    <script src="http://localhost:3005/socket.io/socket.io.js"></script>
+    <script language="javascript">
+
+        var serverUrl = "http://localhost:3005";
+        var groupName = "group1";
+
+        function onMessageFun(message) {
+            console.log("onMessageFun");
+            document.getElementById("serverMessage").innerHTML = document.getElementById("serverMessage").innerHTML + message + "<br>";
+        };
+
+        try {
+            if (io) {
+            }
+        } catch (e) {
+            onMessageFun("socket.io js文件引用问题");
+            throw  "socket.io js文件引用问题";
+        }
+
+        var socket = io.connect(serverUrl, {timeout: 5000});
+
+        socket.on("connect", function () {
+            // 向服务器端发送消息
+            socket.emit('join', {groupName: groupName});
+
+            // 监听join结果消息
+            socket.on("join result", function (message) {
+                console.log("1.join result =>", message );
+                onMessageFun("1.join result =>" + message.message );
+                // 推送消息
+                socket.emit('push', {groupName: groupName, data: 'this is client push data'});
+            });
+            // 监听推送来的消息
+            socket.on("push message", function (message) {
+                onMessageFun("2.get push message =>" + message);
+                console.log("2.get push message =>", message );
+            });
+
+
+        });
+
+        socket.on("disconnect", function () {
+            console.log('client disconnect');
+        });
+
+        socket.on("error", function (err) {
+            console.log('client error:', err);
+        });
+
+    </script>
 </head>
 <body>
-<div id="serverMessage" style="width: 500px;font-size:12px;margin-left: auto;margin-right: auto"></div>
-<script src="http://localhost:3005/socket.io/socket.io.js"></script>
-<script language="javascript">
-
-    var serverUrl = "http://localhost:3005";
-    var groupName = "group1";
-
-    function onMessageFun(message) {
-        console.log("onMessageFun");
-        document.getElementById("serverMessage").innerHTML = document.getElementById("serverMessage").innerHTML + message + "<br>";
-    };
-
-    try {
-        if (io) {
-        }
-    } catch (e) {
-        onMessageFun("socket.io js文件引用问题");
-        throw  "socket.io js文件引用问题";
-    }
-
-    var socket = io.connect(serverUrl, {timeout: 5000});
-
-    socket.on("connect", function () {
-        // 向服务器端发送消息
-        socket.emit('join', {groupName: groupName});
-
-        // 监听join结果消息
-        socket.on("join result", function (message) {
-            console.log("1.join result =>", message );
-            onMessageFun("1.join result =>" + message.message );
-            // 推送消息
-            socket.emit('push', {groupName: groupName, data: 'this is client push data'});
-        });
-        // 监听推送来的消息
-        socket.on("push message", function (message) {
-            onMessageFun("2.get push message =>" + message);
-            console.log("2.get push message =>", message );
-        });
-
-
-    });
-
-    socket.on("disconnect", function () {
-       console.log('client disconnect');
-    });
-
-    socket.on("error", function (err) {
-        console.log('client error:', err);
-    });
-
-</script>
-
+    <div id="serverMessage" style="width: 500px;font-size:12px;margin-left: auto;margin-right: auto"></div>
 </body>
 </html>

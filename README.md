@@ -32,6 +32,7 @@
         actions/globalSearch/monitorMysql.js: 监听数据库变动,同步search缓存
         acticns/globalSearch/test/search.single.test.js: 测试用例
 
+        actions/uploadFile(support breakpoint): 文件上传(支持断点续传)
 
 
 
