@@ -13,6 +13,8 @@
         Common/util/util.js: 常用的功能函数
         Common/util/middleware.js: 自定义中间件函数
 
+        Common/validate/myvalidate.js: 参数有效性验证函数
+
         server/httpServer.js: 创建http服务器
         server/httpsServer.js: 创建https服务器
         server/ioServer.js: 创建io.socket服务器
@@ -35,5 +37,5 @@
         actions/uploadFile(support breakpoint): 文件上传(支持断点续传)
 
 
-
+        usedModule.md 用到的功能模块
 
