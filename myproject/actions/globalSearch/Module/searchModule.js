@@ -1,8 +1,12 @@
 var searchIndex = require('search-index');
-var nodejieba = require("nodejieba"); // 结巴中文分词
 var path = require('path');
 var co = require('co');
 
+var Segment = require('segment');
+// 创建实例
+var segment = new Segment();
+// 使用默认的识别模块及字典，载入字典文件需要1秒，仅初始化时执行一次即可
+segment.useDefault();
 
 var monitorConfig = require('../Config/searchConfig.js');
 
@@ -21,29 +25,21 @@ class SearchEngine {
         this.m_indexs = {}; // 保存现有的索引
     }
 
-    // 判断字符是否是数字或字符串
-    _isCharOrNumber(ch) {
-        var re = /[A-Za-z0-9]/;
-        return re.test(ch);
-    }
-
-    // 处理字符串的中文和英文分词
+    // 处理单个字符串的中文和英文分词
     _parseLine(str) {
         var self = this;
         // 使用中文分词
-        var strArr = nodejieba.cut(str);
-        var res = '';
-        for (var i = 0; i < strArr.length; i++) {
-            if (self._isCharOrNumber(strArr[i]) &&
-                self._isCharOrNumber(strArr[i + 1])
-            ) {
-                res = res + strArr[i];
-            } else {
-                res = res + strArr[i] + ' ';
-            }
+        //var strArr = nodejieba.cut(str);
+        var strArr =  segment.doSegment(str, {
+            simple: true
+        });
+        if(strArr.length > 0) {
+            strArr.push(str);
         }
-        return res;
+        //console.log('strArr:',strArr);
+        return strArr;
     }
+
 
     // 处理整个json对象指定key的分词
     _parseData(jsonData, tableName) {

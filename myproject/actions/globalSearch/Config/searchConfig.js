@@ -1,7 +1,11 @@
 var path = require('path');
 
 var searchConfig = {
-    // 要监听的mysql服务器地址
+    // 要通知的服务器
+    noticeServer: 'http://192.168.63.17:5555',
+    ioPort: 5555,
+
+    // 监听程序和mysql运行在一台服务器
     server: {
         'host': '192.168.63.17',
         'user': 'chenyuan',
