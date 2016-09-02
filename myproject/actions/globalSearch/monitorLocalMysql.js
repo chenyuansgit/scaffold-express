@@ -1,7 +1,7 @@
 // 监听程序和mysql运行在一台服务器
 
 var LiveSQL = require("live-sql"); //依赖于live-sql, zongji
-var monitorConfig = require('../Config/monitorConfig.js');
+var monitorConfig = require('./Config/searchConfig.js');
 
 // 1. 连接到socket.io服务器
 var io = require('socket.io-client');
