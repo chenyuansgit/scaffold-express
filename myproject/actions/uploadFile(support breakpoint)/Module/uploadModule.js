@@ -22,7 +22,7 @@ class uploadModule {
 
         if (storePath) {
             if (fs.existsSync(dir)) {
-                fs.appendFile(storePath, content, callback);
+                fs.appendFile(storePath, content, {encoding: 'binary'},callback);
             } else {
                 callback('路径不存在:'+storePath);
             }

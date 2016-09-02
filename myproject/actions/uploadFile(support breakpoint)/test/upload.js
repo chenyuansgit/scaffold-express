@@ -4,6 +4,9 @@ jQuery(function($){
 
     // 监听事件:选中文件
     $('#choose-file').on('change', function() {
+        // 清空以前的上传记录
+        selectFiles = {};
+
         var files = document.getElementById('choose-file').files;
 
         // 保存选中文件
@@ -27,7 +30,7 @@ jQuery(function($){
             uploadFile.startUploader();
         }
         // 清空上传记录
-        selectFiles = {};
+        //selectFiles = {};
     });
 
 });

@@ -109,7 +109,7 @@ UploadFile.prototype.startUploader = function () {
         self.getTmpFileSize(socket, tmpFileName)
             .then(function (tmpFileSize) {
                 // 定义开始传输的位置
-                this.currentChunkIndex = Math.ceil(tmpFileSize / this.chunkSize);
+                self.currentChunkIndex = Math.ceil(tmpFileSize / self.chunkSize);
                 // 读取文件内容
                 // 发送文件内容
 

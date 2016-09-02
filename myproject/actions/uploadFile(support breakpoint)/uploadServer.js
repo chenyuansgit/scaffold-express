@@ -35,6 +35,7 @@ ioServer.on('connection', function (socket) {
         
         // 获取缓存文件的大小
         var size = uploadModule.getFileSize(tempFileFullPath);
+        console.log('size:', size);
         socket.emit('file size', {size: size});
     });
 
