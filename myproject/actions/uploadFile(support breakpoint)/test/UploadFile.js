@@ -13,8 +13,8 @@ function UploadFile(file) {
     this.spark = new SparkMD5();
 
     // 文件每块的大小(2M)
-    //this.chunkSize = 2097152;
-    this.chunkSize = 1024*10;
+    this.chunkSize = 2097152;
+    //this.chunkSize = 1024*10;
     this.chunksNumber = Math.ceil(this.file.size / this.chunkSize);
     this.currentChunkIndex = 0;
 };
