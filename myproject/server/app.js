@@ -4,7 +4,7 @@ var favicon = require('serve-favicon');
 var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
-var cookieSession = require('cookie-session');
+var cookieSession = require('cookie-session'); // 添加session支持:内存
 
 var middleware = require('../Common/util/middleware.js');
 

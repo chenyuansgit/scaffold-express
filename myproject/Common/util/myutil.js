@@ -5,8 +5,25 @@ var util = require('util');
 
 var myutil = {
     // 打印对象
-    printObject: function(data) {
-        console.log(util.inspect(data,{ showHidden: false, depth: null }));
+    printObject: function (data) {
+        console.log(util.inspect(data, {showHidden: false, depth: null}));
+    },
+
+    // 解析时间戳
+    parseTimestamp: function (timestamp, isSec) { //默认为毫秒
+        if (timestamp) {
+            var time = parseInt(timestamp);
+            if (time != timestamp) {
+                return timestamp;
+            }
+            var date = new Date(time);
+            if (isSec) { // 输入秒
+                date = new Date(time * 1000);
+            }
+            return date.toLocaleString();
+        }
+        return '';
+
     },
 
     // 生成n位随机数
@@ -47,7 +64,7 @@ var myutil = {
     getFileMd5: function (filePath, callback) {
         var spark = new SparkMD5();
 
-        var stream = fs.createReadStream(filePath,  { encoding: 'binary'});
+        var stream = fs.createReadStream(filePath, {encoding: 'binary'});
 
         stream.on('data', function (chunk) {
             spark.appendBinary(chunk);
@@ -58,7 +75,7 @@ var myutil = {
             callback(null, md5);
         });
     },
-   
+
 
 };
 
