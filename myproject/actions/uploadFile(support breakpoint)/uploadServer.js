@@ -3,7 +3,7 @@ var path = require('path');
 
 var uploadModule = require("./Module/uploadModule.js");
 var uploadConfig = require('./Config/uploadConfig.js');
-var util = require('../../Common/util/util.js');
+var util = require('../../Common/util/myutil.js');
 
 var port = uploadConfig.port;
 
@@ -29,7 +29,7 @@ ioServer.on('connection', function (socket) {
     // 1.获取缓存路径中的文件大小
     socket.on('get file size', function (message) {
         console.log('1.get file size:', message);
-        var filename = message.filename;
+        filename = message.filename;
         // 获取文件缓存的完整路径
         tempFileFullPath = path.join(tempPath, filename);
         
@@ -42,7 +42,7 @@ ioServer.on('connection', function (socket) {
     // 2.上传文件到临时路径
     socket.on('upload file', function (message) {
         //console.log('2.upload file:', message);
-        //console.log('upload file...', message.content.length);
+        console.log('upload file...', message.content.length);
         var dir = tempPath;
         uploadModule.appendFile(tempFileFullPath, dir, message.content, function (error, result) {
             if (error) {
@@ -62,10 +62,11 @@ ioServer.on('connection', function (socket) {
 
     // 3.校验文件md5, 保证文件完整传输
     socket.on('vef md5', function (message) {
-        //console.log('3.vef md5:', message);
+        console.log('3.vef md5:', message);
         var msg_md5 = message.md5;
         util.getFileMd5(tempFileFullPath, function (err, result) {
             if (msg_md5 != result) {
+                console.log(msg_md5, result);
                 socket.emit('vef md5 result', {
                     code: 1,
                     message: '文件md5不匹配'
@@ -82,16 +83,18 @@ ioServer.on('connection', function (socket) {
 
     // 4.移动文件到最终路径
     socket.on('set savePath', function (message) {
-        //console.log('4.set savePath:', message);
+        console.log('4.set savePath:', message);
 
         // 将文件移动至最终目录
         var msg_path = message.path;
 
         var dir = path.join(destPath, msg_path);
+
+        console.log(msg_path, dir, destPath, filename);
         destFileFullPath = path.join(destPath, msg_path, filename);
 
         uploadModule.moveFile(tempFileFullPath, dir, destFileFullPath, function (err) {
-            var returnPath = path.join(uploadConfig.destPath, get_path, filename);
+            var returnPath = path.join(uploadConfig.destPath, msg_path, filename);
             //console.log('返回的路径:', returnPath);
             if (err) {
                 socket.emit('move result', {

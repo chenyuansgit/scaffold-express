@@ -52,7 +52,7 @@ UploadFile.prototype.getTmpFileSize = function (socket, filename) {
     });
 };
 
-// 向数据库发送文件
+// 向服务器发送文件(缓存路径)
 UploadFile.prototype.saveFileContent = function (socket) {
     var self = this;
 
@@ -94,6 +94,53 @@ UploadFile.prototype.saveFileContent = function (socket) {
     });
 };
 
+// 校验文件md5, 保证文件完整传输
+UploadFile.prototype.moveFile = function(socket) {
+    var self = this;
+
+    return new Promise(function (resolve, reject) {
+
+        socket.emit('set savePath', {
+            path: 'dest'
+        });
+
+        socket.on("move result", function (message) {
+            var code = message.code;
+            if(code == 0) {
+                resolve('文件移动成功');
+            } else {
+                reject('文件移动失败');
+            }
+        });
+
+    });
+
+};
+
+// 将文件移动到最终路径
+UploadFile.prototype.vefMd5 = function(socket) {
+    var self = this;
+
+    return new Promise(function (resolve, reject) {
+        var fileMd5 = self.spark.end();
+
+        socket.emit('vef md5', {
+            md5: fileMd5
+        });
+
+        socket.on("vef md5 result", function (message) {
+            var code = message.code;
+            if(code == 0) {
+                resolve('文件md5匹配成功');
+            } else {
+                reject('文件md5匹配失败');
+            }
+        });
+
+    });
+
+};
+
 // 上传文件内容
 UploadFile.prototype.startUploader = function () {
     var self = this;
@@ -110,21 +157,24 @@ UploadFile.prototype.startUploader = function () {
             .then(function (tmpFileSize) {
                 // 定义开始传输的位置
                 self.currentChunkIndex = Math.ceil(tmpFileSize / self.chunkSize);
-                // 读取文件内容
-                // 发送文件内容
 
                 return self.saveFileContent(socket);
             })
             .then(function (result) {
                 // 校验传输的md5
-                console.log('finally result:', result);
+                //console.log('finally result:', result);
+                return self.vefMd5(socket);
 
             })
             .then(function (result) {
                 // 移动文件到最终路径
+                return self.moveFile(socket);
+            })
+            .then(function (result) {
+               console.log('finally over!');
             })
             .catch(function (error) {
-                console.log('上传文件发生错误:', error);
+                console.log('上传过程中发生错误:', error);
             });
 
     });
