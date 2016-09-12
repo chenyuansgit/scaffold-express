@@ -10,6 +10,7 @@ var middleware = require('../Common/util/middleware.js');
 
 var index = require('../routes/index');
 var users = require('../routes/users');
+var camera = require('../routes/camera');
 
 var app = express();
 
@@ -30,7 +31,8 @@ app.use(cookieSession({keys: ['artronSecret']}));
 
 
 app.use('/', index);
-app.use('*', middleware.checkLogin); //只有用户登录了,才能进行下面操作
+app.use('/camera', camera);
+app.use('*', middleware.checkNotLogin); //只有用户登录了,才能进行下面操作
 app.use('/user', users);
 
 
