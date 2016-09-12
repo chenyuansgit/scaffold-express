@@ -13,7 +13,7 @@ var myutil = {
     parseTimestamp: function (timestamp, isSec) { //默认为毫秒
         if (timestamp) {
             var time = parseInt(timestamp);
-            if (time != timestamp) {
+            if (time != timestamp) { // 时间格式
                 return timestamp;
             }
             var date = new Date(time);
