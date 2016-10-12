@@ -7,6 +7,10 @@ socket.on('connect', function(){
     console.log('io client connect to server');
 });
 
+socket.on('connect_error', function(){
+    console.log('io client connect error');
+});
+
 socket.on("disconnect", function () {
     console.log('io client disconnect');
 });
