@@ -4,6 +4,9 @@ var middleware = {
     checkLoginOfCookie: function (req, res, next) {
         //console.log(req.cookies);
         //console.log(req.headers);
+
+        // 设置cookie
+        // res.cookie('username',"test",{ maxAge: 60*60*1000,httpOnly:true, path:'/'});
         if (!req.cookies.account) {
             res.send({code: 1, message: '用户未登录'});
             res.end();
@@ -13,6 +16,9 @@ var middleware = {
     },
 
     checkLoginOfSession: function (req, res, next) {
+        // 设置session
+        // req.session.sessname = 'i am a sesion';
+
         // 获取session
         if (!req.session.username) {
             res.redirect('/login');

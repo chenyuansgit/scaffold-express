@@ -6,7 +6,7 @@ var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 var cookieSession = require('cookie-session'); // 添加session支持:内存
 
-var middleware = require('../Common/util/middleware.js');
+var middleware = require('../middleware/commMiddleware.js');
 
 var index = require('../routes/index');
 var users = require('../routes/users');

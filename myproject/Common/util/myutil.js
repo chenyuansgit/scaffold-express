@@ -36,6 +36,11 @@ var myutil = {
         return number;
     },
 
+    // 在范围类的整数
+    getRandNum: function(min, max){
+        return Math.floor(Math.random() * (max - min) + min);
+    },
+
     // 密码加密
     cipherPassword: function (password) { // 加密
         var sha1 = crypto.createHash('sha1');
@@ -76,7 +81,7 @@ var myutil = {
         });
     },
 
-
+    
 };
 
 
