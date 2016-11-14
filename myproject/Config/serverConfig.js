@@ -16,6 +16,10 @@ var serverConfig = {
         host: '127.0.0.1',
         port: 3007,
         clientPort: 3008
+    },
+    websocket:{
+        host: '127.0.0.1',
+        port: 3009
     }
 
 };

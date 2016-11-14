@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Test websocket socket</title>
+    <script language="javascript">
+
+        var serverUrl = "ws://127.0.0.1:3009";
+
+        if (window.WebSocket) {
+            var ws = new WebSocket(serverUrl);
+            ws.onopen = function () {
+                ws.send("message to send..."); // 向服务器发送消息
+            };
+            ws.onmessage = function (evt) {
+                var received_msg = evt.data;
+                alert("received message: " + received_msg); // 浏览器接收到消息
+            };
+            ws.onclose = function () {
+                console.log("connection is closed");
+            };
+            ws.onerror = function (error) {
+                console.log(error);
+            };
+        } else {
+            alert('not surport WebSocket');
+        }
+
+
+    </script>
+</head>
+<body>
+<div id="serverMessage" style="width: 500px;font-size:12px;margin-left: auto;margin-right: auto"></div>
+</body>
+</html>
