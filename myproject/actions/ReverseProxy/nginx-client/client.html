@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Websocket Client</title>
+    <script src="bower_components/socket.io-client/socket.io.min.js"></script>
+    <script src="bower_components/jquery/dist/jquery.min.js"></script>
+</head>
+<body>
+<h1>Socket.IO Client</h1>
+<div id="content">connecting....</div>
+<script>
+    var socket = io.connect('http://localhost:3102');
+    socket.on('server', function (data) {
+        console.log(data);
+        $('#content').html(JSON.stringify(data));
+    });
+</script>
+</body>
+</html>
