@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="dataSourceStorageLocal">
+    <data-source name="MySQL - oa_gallery@localhost" uuid="962d137a-8f41-4dae-89e4-a45f4da86ce7">
+      <secret-storage>master_key</secret-storage>
+      <user-name>chenyuan</user-name>
+      <schema-pattern>oa_gallery.*</schema-pattern>
+      <default-schemas>oa_gallery.*</default-schemas>
+    </data-source>
+  </component>
+</project>
