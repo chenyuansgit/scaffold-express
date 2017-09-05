@@ -43,7 +43,7 @@ function createLogHandler(fname) {
     'notify'
 ]
     .forEach(function (name) {
-        module.exports[name] = createLogHandler(name); // 导出预定义的格式
+        module.exports[name] = createLogHandler(name).log; // 导出预定义的格式
     });
 
 

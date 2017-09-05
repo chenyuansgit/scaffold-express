@@ -5,7 +5,6 @@ const BlockLog = require('./blocklog.js');
 
 // response
 app.use(ctx => {
-
     var urls = ctx.url.split('/');
 
     var logfile = urls.join('.').substr(1);
