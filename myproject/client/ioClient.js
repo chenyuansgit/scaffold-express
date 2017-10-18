@@ -1,6 +1,11 @@
 // 1. 连接到socket.io服务器
 var io = require('socket.io-client');
 
+
+/*var socket = io.connect('http://localhost:3000/', {
+    path: "/push"
+});*/
+
 var socket = io.connect('http://localhost:3005');
 
 socket.on('connect', function(){

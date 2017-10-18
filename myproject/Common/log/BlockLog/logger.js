@@ -14,13 +14,14 @@ var config = {
 mkdir(config.logRoot); // 创建日志的根文件夹
 
 // 创建每一种类型日志的格式
-function createLogHandler(fname) {
+function createLogHandler(fname, maxLogFiles) {
     var logOption = {
         root: config.logRoot,
         format: "{{timestamp}} {{message}}",
         dateformat: 'HH:MM:ss',
         splitFormat: 'yyyymmdd',
         allLogsFileName: fname,
+        maxLogFiles: maxLogFiles || 25,
         filters: function (s, d) {
             //d.title = fname; // 日志文件名
             if (config['envType'] != 'prod') {
